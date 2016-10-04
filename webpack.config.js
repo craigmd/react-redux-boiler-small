@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    path: './src/main.js'
+    path: './src/index.js'
   },
   output: {
     path: './build',
@@ -21,7 +21,6 @@ module.exports = {
   },
   devtool: 'eval-source-map',
   devServer: {
-    contentBase: './build',
-    inline: true
+    contentBase: './build'
   }
 }
