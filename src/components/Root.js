@@ -9,7 +9,9 @@ import routes from '../routes'
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router history={browserHistory}>
-      {routes()}
+      <Route component={Layout}>
+        {routes()}
+      </Route>
     </Router>
   </Provider>
 );

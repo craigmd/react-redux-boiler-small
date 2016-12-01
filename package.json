@@ -1,10 +1,11 @@
 {
   "name": "react-boiler",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "My React-Redux boiler",
   "main": "./build/bundle.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline",
+    "production": "NODE_ENV=production webpack --progress -p",
+    "start": "NODE_ENV=development webpack-dev-server --content-base ./public --hot --inline",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "craig dickson",
@@ -12,7 +13,9 @@
   "devDependencies": {
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
+    "babel-polyfill": "^6.16.0",
     "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "css-loader": "^0.23.1",
     "node-sass": "^3.7.0",
@@ -23,6 +26,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "normalize.css": "^5.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1",

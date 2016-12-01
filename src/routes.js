@@ -5,12 +5,12 @@ import { Route } from 'react-router'
 //Components
 import Layout from './components/Layout'
 
-let routes = () => {
-  return <Route to="/" component={Layout}>
-    <IndexRedirect to="" />
-    <Route to="" component={} />
-  </Route>
-}
-  <Route to="/" component={} />
+const routes = () => {
+  return (
+    <Route path="/" component={Layout}>
+      <Route path="" component={} />
+    </Route>
+  );
+};
 
 export default routes

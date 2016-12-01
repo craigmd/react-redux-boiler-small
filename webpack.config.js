@@ -1,10 +1,13 @@
-module.exports = {
+'user-strict'
+
+var webpack = require('webpack');
+var path = require('path');
+
+var env = process.env.NODE_ENV;
+
+var config = {
   entry: {
-    path: './src/index.js'
-  },
-  output: {
-    path: './build',
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, 'src', 'index.js')
   },
   module: {
     loaders: [
@@ -14,13 +17,30 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: 'node_modules',
+        exclude: path.resolve(__dirname, 'node_modules'),
         loader: 'babel-loader'
       }
     ]
   },
-  devtool: 'eval-source-map',
-  devServer: {
-    contentBase: './build'
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(env)
+    })
+  ]
+};
+
+if (env === 'development') {
+  config.devtool = 'eval-source-map';
+  config.output = {
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js'
+  }
+} else if (env === 'production') {
+  config.devtool = 'cheap-source-map'
+  config.output = {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   }
 }
+
+module.exports = config
