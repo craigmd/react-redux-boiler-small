@@ -1,10 +1,16 @@
-//Libs
+// Libs
 import { combineReducers } from 'redux'
 
-//Reduers
+// Reducers
+const reducer = (state = {}, action) => {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
 
-const app = combineReducers({});
+const app = combineReducers({ reducer })
 
-//Selectors
+// Selectors
 
-export app;
+export default app

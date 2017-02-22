@@ -1,12 +1,17 @@
-//Libs
-import React from 'react'
+import React, { PropTypes } from 'react'
+
+const propTypes = {
+  children: PropTypes.node
+}
 
 const Layout = ({ children }) => {
   return (
     <div>
-      { children }
+      {children}
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+Layout.propTypes = propTypes
+
+export default Layout

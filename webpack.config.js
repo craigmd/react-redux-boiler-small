@@ -10,6 +10,13 @@ var config = {
     path: path.resolve(__dirname, 'src', 'index.js')
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'eslint',
+        include: path.resolve(__dirname, 'src')
+      }
+    ],
     loaders: [
       {
         test: /\.scss$/,
@@ -19,6 +26,19 @@ var config = {
         test: /\.js$/,
         exclude: path.resolve(__dirname, 'node_modules'),
         loader: 'babel-loader'
+      },
+      {
+        exclude: [
+          /\.html$/,
+          /\.(js|jsx)$/,
+          /\.(css|scss)$/,
+          /\.json$/
+        ],
+        loader: 'url',
+        query: {
+          limit: 10000,
+          name: 'static/media/[name].[hash:8].[ext]'
+        }
       }
     ]
   },

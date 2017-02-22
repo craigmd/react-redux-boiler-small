@@ -1,13 +1,11 @@
-//Libs
+// Libs
 import { createStore } from 'redux'
 
-//Reducers
+// Reducers
 import app from './reducers'
 
 const configureStore = () => {
-  const store = createStore(app);
-
-  return store;
+  return createStore(app)
 }
 
 export default configureStore

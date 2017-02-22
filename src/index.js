@@ -1,11 +1,14 @@
-//Libs
+// Libs
 import React from 'react'
 import { render } from 'react-dom'
-
-//Components
+// Store
+import configureStore from './configureStore'
+// Components
 import Root from './components/Root'
+// Sass
+import './stylesheets/main.scss'
 
 render(
-  <Root store={store}/>,
+  <Root store={configureStore()} />,
   document.getElementById('root')
-);
+)

@@ -1,16 +1,16 @@
-//Libs
+// Libs
 import React from 'react'
-import { Route } from 'react-router'
+import { Route, IndexRoute } from 'react-router'
 
-//Components
+// Components
 import Layout from './components/Layout'
+import App from './components/App'
 
-const routes = () => {
-  return (
-    <Route path="/" component={Layout}>
-      <Route path="" component={} />
-    </Route>
-  );
-};
+const routes = (
+  <Route path='/' component={Layout}>
+    <IndexRoute component={App} />
+    <Route path='/home' component={App} />
+  </Route>
+)
 
 export default routes
