@@ -6,6 +6,7 @@ const App = () => {
     <div>
       <img src={logo} />
       <h1>React/Redux Boilerplate (Small)</h1>
+      <h2>More things</h2>
     </div>
   )
 }
