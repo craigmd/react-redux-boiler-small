@@ -1,26 +1,27 @@
 'user-strict'
 
-var webpack = require('webpack');
-var path = require('path');
+var webpack = require('webpack')
+var path = require('path')
 
 var env = process.env.NODE_ENV;
 
 var config = {
-  entry: {
-    path: path.resolve(__dirname, 'src', 'index.js')
-  },
+  context: path.resolve(__dirname, 'src'),
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'eslint',
+        enforce: 'pre',
+        loader: 'eslint-loader',
         include: path.resolve(__dirname, 'src')
-      }
-    ],
-    loaders: [
+      },
       {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
+        test: /\.(css|scss)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.js$/,
@@ -34,7 +35,7 @@ var config = {
           /\.(css|scss)$/,
           /\.json$/
         ],
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]'
@@ -43,6 +44,8 @@ var config = {
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env)
     })
@@ -50,16 +53,28 @@ var config = {
 };
 
 if (env === 'development') {
-  config.devtool = 'eval-source-map';
+  config.entry = [
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    './index.js'
+  ];
+  config.devServer = {
+    contentBase: path.resolve(__dirname, 'public'),
+    hot: true,
+    publicPath: '/'
+  };
+  config.devtool = 'inline-source-map';
   config.output = {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   }
 } else if (env === 'production') {
   config.devtool = 'cheap-source-map'
   config.output = {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   }
 }
 

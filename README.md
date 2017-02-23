@@ -1,6 +1,6 @@
 # What's in this boilerplate?
 
-  - Webpack
+  - Webpack 2!
   - Babel
   - Redux
   - React Router
