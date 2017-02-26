@@ -44,7 +44,6 @@ var config = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env)
@@ -53,6 +52,7 @@ var config = {
 };
 
 if (env === 'development') {
+  config.plugins.push(new webpack.HotModuleReplacementPlugin())
   config.entry = [
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
@@ -60,6 +60,7 @@ if (env === 'development') {
   ];
   config.devServer = {
     contentBase: path.resolve(__dirname, 'public'),
+    historyApiFallback: true,
     hot: true,
     publicPath: '/'
   };
