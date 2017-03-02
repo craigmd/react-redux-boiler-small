@@ -10,12 +10,6 @@ var config = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        enforce: 'pre',
-        loader: 'eslint-loader',
-        include: path.resolve(__dirname, 'src')
-      },
-      {
         test: /\.(css|scss)$/,
         use: [
           'style-loader',
@@ -52,12 +46,23 @@ var config = {
 };
 
 if (env === 'development') {
-  config.plugins.push(new webpack.HotModuleReplacementPlugin())
   config.entry = [
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
     './index.js'
   ];
+  config.output = {
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js',
+    publicPath: '/'
+  };
+  config.module.rules.push({
+    test: /\.(js|jsx)$/,
+    enforce: 'pre',
+    loader: 'eslint-loader',
+    include: path.resolve(__dirname, 'src')
+  });
+  config.plugins.push(new webpack.HotModuleReplacementPlugin())
   config.devServer = {
     contentBase: path.resolve(__dirname, 'public'),
     historyApiFallback: true,
@@ -65,18 +70,14 @@ if (env === 'development') {
     publicPath: '/'
   };
   config.devtool = 'inline-source-map';
-  config.output = {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js',
-    publicPath: '/'
-  }
 } else if (env === 'production') {
-  config.devtool = 'cheap-source-map'
+  config.entry = './index.js';
+  config.devtool = 'cheap-source-map';
   config.output = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/'
-  }
+  };
 }
 
 module.exports = config

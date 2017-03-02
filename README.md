@@ -5,7 +5,8 @@
   - Redux
   - React Router
   - React Redux Bindings
-  - ESLint
+  - ESLint (Extends StandardJS)
+  - Express
 
 # Why structure by file nature?
 
